@@ -12,9 +12,8 @@
 </head>
 <body>
 
-    <h1> El usuario que se intentó registrar fue insertado en la base de datos </h1>
-    <h1> The user you attempt to add was successfully registered in the database </h1>
+    <h1> El resultado de la operacion fue exitosa:  </h1>
 
-    <h3> Filas afectadas : <%=request.getAttribute("rowsaffected")%> </h3>
+    <h3> Detalle: <%=request.getAttribute("mensaje")%> </h3>
 </body>
 </html>

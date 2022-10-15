@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +59,75 @@ public class UserDao {
                     listUsers.add(user);
             }
             return listUsers;
+    }
+
+
+    public int updateUser(String nroDoc,User user) throws Exception{
+            MySQLConnection mySQLConnection = new MySQLConnection();
+            Connection con = mySQLConnection.getConnection();
+
+            String querySelect = "SELECT * FROM USERS WHERE nroDoc = ?";
+
+            PreparedStatement ps = con.prepareStatement(querySelect);
+            ps.setString(1,nroDoc);
+            ResultSet resultSet = ps.executeQuery();
+
+            int count=0;
+            while(resultSet.next()){
+                count++;
+            }
+
+            if(count==0){
+                return 0;
+            }else{
+                    String queryUpdate = "UPDATE USERS SET name=?," +
+                            "lastname=?," +
+                            "username=?," +
+                            "pass=?," +
+                            "tipDoc=?," +
+                            "enable=? " +
+                            "WHERE nroDoc=?";
+
+                    PreparedStatement psUpdate = con.prepareStatement(queryUpdate);
+                    psUpdate.setString(1,user.getName());
+                    psUpdate.setString(2,user.getLastname());
+                    psUpdate.setString(3,user.getUsername());
+                    psUpdate.setString(4,user.getPass());
+                    psUpdate.setString(5,user.getTipDoc());
+                    psUpdate.setInt(6,user.getEnable());
+                    psUpdate.setString(7,nroDoc);
+
+                    return psUpdate.executeUpdate();
+            }
+    }
+
+
+
+    public User getUserByDni(String nroDoc) throws Exception{
+            MySQLConnection mySQLConnection = new MySQLConnection();
+            Connection con = mySQLConnection.getConnection();
+
+            String querySelect = "SELECT * FROM USERS WHERE nroDoc = ?";
+
+            PreparedStatement ps = con.prepareStatement(querySelect);
+            ps.setString(1,nroDoc);
+            ResultSet resultSet = ps.executeQuery();
+
+            User user = new User();
+
+            while(resultSet.next()){
+                    user.setName(resultSet.getString("name"));
+                    user.setLastname(resultSet.getString("lastname"));
+                    user.setUsername(resultSet.getString("username"));
+                    user.setTipDoc(resultSet.getString("tipDoc"));
+                    user.setNroDoc(resultSet.getString("nroDoc"));
+                    user.setPass(resultSet.getString("pass"));
+                    user.setEnable(Integer.parseInt(resultSet.getString("enable")));
+                    break;
+            }
+
+            return user;
+
     }
 
 

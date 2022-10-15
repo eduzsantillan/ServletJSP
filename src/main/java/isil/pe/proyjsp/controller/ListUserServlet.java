@@ -13,12 +13,6 @@ import java.util.List;
 public class ListUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         UserDao userDao = new UserDao();
         try {
             List<User> listUsers = userDao.getUsers();
@@ -30,5 +24,11 @@ public class ListUserServlet extends HttpServlet {
             requestDispatcher.forward(request,response);
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
     }
 }

@@ -14,6 +14,6 @@
   <h1> Ha ocurrido un error : </h1>
   <h1> There was a problem with running process </h1>
 
-  <h3> Here is the error's detail : <%=request.getAttribute("message")%> </h3>
+  <h3> Here is the error's detail : <%=request.getAttribute("mensaje")%> </h3>
 </body>
 </html>

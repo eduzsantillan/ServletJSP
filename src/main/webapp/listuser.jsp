@@ -30,19 +30,7 @@
             </tr>
             </thead>
             <tbody>
-            <%List<User> userList = (List<User>) request.getAttribute("list"); %>
-            <%
-                for (User user: userList) {
-                    %>
-            <tr>
-                <td><%=user.getName()%></td>
-                <td><%=user.getLastname()%></td>
-                <td><%=user.getUsername()%></td>
-                <td><%=user.getTipDoc()%></td>
-                <td><%=user.getNroDoc()%></td>
-                <td><%=user.getEnable()%></td>
-            </tr>
-            <%    }%>
+
             </tbody>
         </table>
     </div>
